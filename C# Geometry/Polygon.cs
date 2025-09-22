@@ -1,7 +1,8 @@
 ﻿//
 
 using System.Diagnostics.CodeAnalysis;
-using Coordinate;
+using static Coordinates;
+using static Geometry;
 
 class Polygon
 {
@@ -26,9 +27,10 @@ class Polygon
     private int interalAngle;
     private int externalAngle;
     private int interiorAngleSum;
+    private int exteriorAngleSum;
 
     //coordinates
-    private List<Coordinate> coordinates;
+    private Coordinate[] coordinates;
 
     //Enum checks 
     enum MeasureType
@@ -51,13 +53,42 @@ class Polygon
     public int InteralAngle { get { return interalAngle; } }
     public int ExternalAngle { get { return externalAngle; } }
     public int InteriorAngleSumDiamater { get { return interiorAngleSum; } }
-    public List<Coordinate> Coordinates { get { return coordinates; } }
+    public int ExteriorAngleSumDiamater { get { return exteriorAngleSum; } }
+    public Coordinate[] PolygonCoordinates { get { return coordinates; } }
 
 
-    public Polygon (int InputSides, float InputRadius)
+    public Polygon (int InputSides, double InputRadius)
     {
 
+
+    //Measurements
+    this.diamater = Geometry.Diamater(InputRadius);
+    this.radius = InputRadius;
+    this.apothem = Geometry.Apothem(InputRadius, InputSides);
+
+    //Sides 
+    this.sides = InputSides; 
+    this.sideLength = Geometry.SidesLengthRadius(InputRadius, InputSides);
+
+    //Interiors
+    this.diagonals = Geometry.Diagonals(InputSides);
+    this.perimiter = Geometry.Perimiter(InputRadius, InputSides, 'R');
+
+    //Area
+    this.area = Geometry.Area(InputRadius, InputSides, 'R'); ;
+    this.triangleAreas = Geometry.InternalTriangleArea(this.Apothem, InputSides);
+
+    //Angles 
+    this.interalAngle = Geometry.InteriorAngles(InputSides);
+    this.externalAngle = Geometry.ExteriorAngles(InputSides);
+    this.interiorAngleSum = this.InteralAngle * InputSides;
+
+    //coordinates
+    this.coordinates = Coordinates.CalculateCoordinates(InputRadius, InputSides);
+
     }
+
+    
 
 
 

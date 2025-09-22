@@ -1,18 +1,30 @@
 ﻿using System;
 
+
 public struct Coordinate
 {
-    private readonly double x;
-    private readonly double y;
+    public double x;
+    public double y;
+}
 
-    public double X { get { return x; } }
-    public double Y { get { return y; } }
+public class Coordinates
+{
 
-    public Coordinate(double latitude, double longitude)
+    public static Coordinate[] CalculateCoordinates(double InputRadius, int InputSides)
     {
-        this.x = latitude;
-        this.y = longitude;
+        // Calculate the coordinates of the vertices of a regular polygon
+        Coordinate[] coords = new Coordinate[InputSides];
+        double angleStep = 360.0 / InputSides;
+        for (int i = 0; i < InputSides; i++)
+        {
+            double angle = i * angleStep;
+            double radian = angle * (Math.PI / 180.0);
+            double xCoord = InputRadius * Math.Cos(radian);
+            double yCoord = InputRadius * Math.Sin(radian);
+            coords[i].x = xCoord;
+            coords[i].y = yCoord;
+        }
+        return coords;
     }
-
 
 }
