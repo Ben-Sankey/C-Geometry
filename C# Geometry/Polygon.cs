@@ -40,6 +40,37 @@ class Polygon
         Apothem, 
     }
 
+    //Constructor
+    public Polygon(double InputRadius, int InputSides)
+    {
+        //Measurements
+        diamater = CalDiamater(InputRadius);
+        radius = InputRadius;
+        apothem = CalApothem(InputRadius, InputSides);
+
+        //Sides 
+        sides = InputSides;
+        sideLength = CalSideLength(InputRadius, InputSides);
+
+        //Interiors
+        diagonals = CalDiagonals(InputSides);
+        perimiter = CalPerimiter(InputRadius, InputSides);
+
+        //Area
+        area = CalArea(InputRadius, InputSides);
+        triangleAreas = CalTriangleAreas(InputRadius, InputSides);
+
+        //Angles 
+        interalAngle = CalInteralAngle(InputSides);
+        externalAngle = CalExternalAngle(InputSides);
+        interiorAngleSum = CalInteriorAngleSum(InputSides);
+        exteriorAngleSum = CalExteriorAngleSum(InputSides);
+
+        //coordinates
+        coordinates = CalculateCoordinates(InputRadius, InputSides);
+
+    }
+
     //Get functions
     public double Diamater { get { return diamater; } }
     public double Radius { get { return radius; } }
@@ -55,47 +86,382 @@ class Polygon
     public int InteriorAngleSumDiamater { get { return interiorAngleSum; } }
     public int ExteriorAngleSumDiamater { get { return exteriorAngleSum; } }
     public Coordinate[] PolygonCoordinates { get { return coordinates; } }
-
-
-    public Polygon (int InputSides, double InputRadius)
+    
+    //Set functions
+    public int SetDiamater(double InputDiamater)
     {
+        try
+        {
+            diamater = InputDiamater;
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetRadius(double InputRadius)
+    {
+        try
+        {
+            radius = InputRadius;
 
-    //Measurements
-    this.diamater = Geometry.Diamater(InputRadius);
-    this.radius = InputRadius;
-    this.apothem = Geometry.Apothem(InputRadius, InputSides);
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public double SetApothem(double InputApothem) 
+    {
+        try
+        {
+            apothem = InputApothem;
 
-    //Sides 
-    this.sides = InputSides; 
-    this.sideLength = Geometry.SidesLengthRadius(InputRadius, InputSides);
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetSides(int InputSides)
+    {
+        try
+        {
+            sides = InputSides;
 
-    //Interiors
-    this.diagonals = Geometry.Diagonals(InputSides);
-    this.perimiter = Geometry.Perimiter(InputRadius, InputSides, 'R');
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetSideLength(double InputSideLength)
+    {
+        try
+        {
+            sideLength = InputSideLength;
 
-    //Area
-    this.area = Geometry.Area(InputRadius, InputSides, 'R'); ;
-    this.triangleAreas = Geometry.InternalTriangleArea(this.Apothem, InputSides);
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetDiagonals(int InputDiagonals) 
+    {
+        try
+        {
+            diagonals = InputDiagonals;
 
-    //Angles 
-    this.interalAngle = Geometry.InteriorAngles(InputSides);
-    this.externalAngle = Geometry.ExteriorAngles(InputSides);
-    this.interiorAngleSum = this.InteralAngle * InputSides;
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetPerimiter(double InputPerimiter) 
+    {
+        try
+        {
+            perimiter = InputPerimiter;
 
-    //coordinates
-    this.coordinates = Coordinates.CalculateCoordinates(InputRadius, InputSides);
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetArea(double InputArea) 
+    {
+        try
+        {
+            area = InputArea;
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetTriangleAreas(double InputTriangleAreas) 
+    {
+        try
+        {
+            triangleAreas = InputTriangleAreas;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetInteralAngle(int InputInteralAngle) 
+    {
+        try
+        {
+            interalAngle = InputInteralAngle;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetExternalAngle(int InputExternalAngle)
+    {
+        try
+        {
+            externalAngle = InputExternalAngle;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetInteriorAngleSum(int InputInteriorAngleSum) 
+    {
+        try
+        {
+            interiorAngleSum = InputInteriorAngleSum;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetExteriorAngleSum(int InputExteriorAngleSum) 
+    {
+        try
+        {
+            exteriorAngleSum = InputExteriorAngleSum;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int SetPolygonCoordinates(Coordinate[] InputCoordinates) 
+    {
+        try
+        {
+            coordinates = InputCoordinates;
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
     }
 
+    //Calculate functions
+    public int CalDiamater(double InputRadius)
+    {
+        try
+        {
+            //Measurements
+            diamater = Geometry.Diamater(InputRadius);
+            
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
     
+    public double CalApothem(double InputRadius, int InputSides)
+    {
+        try
+        {
+            apothem = Geometry.Apothem(InputRadius, InputSides);
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    
+    public int CalSideLength(double InputRadius, int InputSides)
+    {
+        try
+        {
+            sideLength = Geometry.SidesLengthRadius(InputRadius, InputSides);
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalDiagonals(int InputSides)
+    {
+        try
+        {
+            //Interiors
+            diagonals = Geometry.Diagonals(InputSides);
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalPerimiter(double InputRadius, int InputSides)
+    {
+        try
+        {
+            perimiter = Geometry.Perimiter(InputRadius, InputSides, 'R');
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalArea(double InputRadius, int InputSides)
+    {
+        try
+        {
+            //Area
+            area = Geometry.Area(InputRadius, InputSides, 'R'); ;
+           
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalTriangleAreas(double InputRadius, int InputSides)
+    {
+        try
+        {
+            triangleAreas = Geometry.InternalTriangleArea(this.CalApothem(InputRadius, InputSides), InputSides);
+            
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalInteralAngle(int InputSides)
+    {
+        try
+        {
+            //Angles 
+            interalAngle = Geometry.InteriorAngles(InputSides);
+            
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalExternalAngle(int InputSides)
+    {
+        try
+        {
+            externalAngle = Geometry.ExteriorAngles(InputSides);
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalInteriorAngleSum(int InputSides)
+    {
+        try
+        {
+            interiorAngleSum = this.CalInteralAngle(InputSides) * InputSides;
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalExteriorAngleSum(int InputSides)
+    {
+        try
+        {
+            exteriorAngleSum = this.CalExternalAngle(InputSides) * InputSides;
+            
 
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
+    public int CalPolygonCoordinates(double InputRadius, int InputSides)
+    {
+        try
+        {
+            coordinates = Coordinates.CalculateCoordinates(InputRadius, InputSides);
+
+            return 0; // Indicate success
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occurred: " + e.Message);
+            return -1; // Indicate an error occurred
+        }
+    }
 
 }
