@@ -32,6 +32,8 @@ class Polygon
     //coordinates
     private Coordinate[] coordinates;
 
+    
+
     //Enum checks 
     enum MeasureType
     {
@@ -317,12 +319,11 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    
     public int CalSideLength(double InputRadius, int InputSides)
     {
         try
         {
-            sideLength = Geometry.SidesLengthRadius(InputRadius, InputSides);
+            sideLength = SidesLengthRadius(InputRadius, InputSides);
 
             return 0; // Indicate success
         }
@@ -381,7 +382,7 @@ class Polygon
     {
         try
         {
-            triangleAreas = Geometry.InternalTriangleArea(this.CalApothem(InputRadius, InputSides), InputSides);
+            triangleAreas = InternalTriangleArea(CalApothem(InputRadius, InputSides), InputSides);
             
             return 0; // Indicate success
         }
@@ -396,7 +397,7 @@ class Polygon
         try
         {
             //Angles 
-            interalAngle = Geometry.InteriorAngles(InputSides);
+            interalAngle = InteriorAngles(InputSides);
             
             return 0; // Indicate success
         }
@@ -410,7 +411,7 @@ class Polygon
     {
         try
         {
-            externalAngle = Geometry.ExteriorAngles(InputSides);
+            externalAngle = ExteriorAngles(InputSides);
 
             return 0; // Indicate success
         }
@@ -424,7 +425,7 @@ class Polygon
     {
         try
         {
-            interiorAngleSum = this.CalInteralAngle(InputSides) * InputSides;
+            interiorAngleSum = CalInteralAngle(InputSides) * InputSides;
 
             return 0; // Indicate success
         }
@@ -438,7 +439,7 @@ class Polygon
     {
         try
         {
-            exteriorAngleSum = this.CalExternalAngle(InputSides) * InputSides;
+            exteriorAngleSum = CalExternalAngle(InputSides) * InputSides;
             
 
             return 0; // Indicate success
@@ -453,7 +454,7 @@ class Polygon
     {
         try
         {
-            coordinates = Coordinates.CalculateCoordinates(InputRadius, InputSides);
+            coordinates = CalculateCoordinates(InputRadius, InputSides);
 
             return 0; // Indicate success
         }
