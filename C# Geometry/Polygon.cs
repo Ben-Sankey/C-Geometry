@@ -1,13 +1,11 @@
 ﻿//
-
-using System.Diagnostics.CodeAnalysis;
 using static Coordinates;
 using static Geometry;
 
 class Polygon
 {
     //Measurements
-    private double diamater;
+    private double diameter;
     private double radius;
     private double apothem;
 
@@ -46,35 +44,40 @@ class Polygon
     public Polygon(double InputRadius, int InputSides)
     {
         //Measurements
-        diamater = CalDiamater(InputRadius);
+        CalDiamater(InputRadius);
         radius = InputRadius;
-        apothem = CalApothem(InputRadius, InputSides);
+        CalApothem(InputRadius, InputSides);
 
         //Sides 
         sides = InputSides;
-        sideLength = CalSideLength(InputRadius, InputSides);
+        CalSideLength(InputRadius, InputSides);
 
         //Interiors
-        diagonals = CalDiagonals(InputSides);
-        perimiter = CalPerimiter(InputRadius, InputSides);
+        CalDiagonals(InputSides);
+        CalPerimiter(InputRadius, InputSides);
 
         //Area
-        area = CalArea(InputRadius, InputSides);
-        triangleAreas = CalTriangleAreas(InputRadius, InputSides);
+        CalArea(InputRadius, InputSides);
+        CalTriangleAreas(InputRadius, InputSides);
 
         //Angles 
-        interalAngle = CalInteralAngle(InputSides);
-        externalAngle = CalExternalAngle(InputSides);
-        interiorAngleSum = CalInteriorAngleSum(InputSides);
-        exteriorAngleSum = CalExteriorAngleSum(InputSides);
+        CalInteralAngle(InputSides);
+        CalExternalAngle(InputSides);
+        CalInteriorAngleSum(InputSides);
+        CalExteriorAngleSum(InputSides);
 
         //coordinates
-        coordinates = CalculateCoordinates(InputRadius, InputSides);
+        CalPolygonCoordinates(InputRadius, InputSides);
+
+        if(coordinates == null)
+        {
+            coordinates = new Coordinate[0];
+        }
 
     }
 
     //Get functions
-    public double Diamater { get { return diamater; } }
+    public double Diameter { get { return diameter; } }
     public double Radius { get { return radius; } }
     public double Apothem { get { return apothem; } }
     public int Sides { get { return sides; } }
@@ -83,18 +86,18 @@ class Polygon
     public double Perimiter { get { return perimiter; } }
     public double Area { get { return area; } }
     public double TriangleAreas { get { return triangleAreas; } }
-    public int InteralAngle { get { return interalAngle; } }
+    public int InternalAngle { get { return interalAngle; } }
     public int ExternalAngle { get { return externalAngle; } }
-    public int InteriorAngleSumDiamater { get { return interiorAngleSum; } }
-    public int ExteriorAngleSumDiamater { get { return exteriorAngleSum; } }
-    public Coordinate[] PolygonCoordinates { get { return coordinates; } }
+    public int InteriorAngleSum { get { return interiorAngleSum; } }
+    public int ExteriorAngleSum { get { return exteriorAngleSum; } }
+    public Coordinate[] VertexCoordinates { get { return coordinates; } }
     
     //Set functions
     public int SetDiamater(double InputDiamater)
     {
         try
         {
-            diamater = InputDiamater;
+            diameter = InputDiamater;
 
             return 0; // Indicate success
         }
@@ -293,7 +296,7 @@ class Polygon
         try
         {
             //Measurements
-            diamater = Geometry.Diamater(InputRadius);
+            diameter = Geometry.Diamater(InputRadius);
             
 
             return 0; // Indicate success

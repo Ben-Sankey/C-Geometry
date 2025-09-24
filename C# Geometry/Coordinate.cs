@@ -1,16 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Reflection.Metadata;
+﻿using System.Drawing;
 
-
-public struct Coordinate
+class Coordinates
 {
-    public int x;
-    public int y;
-}
+    public struct Coordinate
+    {
+        public int x;
+        public int y;
+    }
 
-public class Coordinates
-{
     //Generate Functions
     public static Coordinate[] CalculateCoordinates(double InputRadius, int InputSides)
     {
