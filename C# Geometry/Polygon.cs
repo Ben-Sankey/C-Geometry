@@ -30,14 +30,14 @@ class Polygon
     //coordinates
     private Coordinate[] coordinates;
 
-    
+
 
     //Enum checks 
     enum MeasureType
     {
-        Diaeter, 
+        Diaeter,
         Radius,
-        Apothem, 
+        Apothem,
     }
 
     //Constructor
@@ -69,7 +69,7 @@ class Polygon
         //coordinates
         CalPolygonCoordinates(InputRadius, InputSides);
 
-        if(coordinates == null)
+        if (coordinates == null)
         {
             coordinates = new Coordinate[0];
         }
@@ -91,7 +91,7 @@ class Polygon
     public int InteriorAngleSum { get { return interiorAngleSum; } }
     public int ExteriorAngleSum { get { return exteriorAngleSum; } }
     public Coordinate[] VertexCoordinates { get { return coordinates; } }
-    
+
     //Set functions
     public int SetDiamater(double InputDiamater)
     {
@@ -121,7 +121,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public double SetApothem(double InputApothem) 
+    public double SetApothem(double InputApothem)
     {
         try
         {
@@ -163,7 +163,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetDiagonals(int InputDiagonals) 
+    public int SetDiagonals(int InputDiagonals)
     {
         try
         {
@@ -177,7 +177,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetPerimiter(double InputPerimiter) 
+    public int SetPerimiter(double InputPerimiter)
     {
         try
         {
@@ -191,7 +191,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetArea(double InputArea) 
+    public int SetArea(double InputArea)
     {
         try
         {
@@ -205,7 +205,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetTriangleAreas(double InputTriangleAreas) 
+    public int SetTriangleAreas(double InputTriangleAreas)
     {
         try
         {
@@ -219,7 +219,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetInteralAngle(int InputInteralAngle) 
+    public int SetInteralAngle(int InputInteralAngle)
     {
         try
         {
@@ -247,7 +247,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetInteriorAngleSum(int InputInteriorAngleSum) 
+    public int SetInteriorAngleSum(int InputInteriorAngleSum)
     {
         try
         {
@@ -261,7 +261,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetExteriorAngleSum(int InputExteriorAngleSum) 
+    public int SetExteriorAngleSum(int InputExteriorAngleSum)
     {
         try
         {
@@ -275,7 +275,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    public int SetPolygonCoordinates(Coordinate[] InputCoordinates) 
+    public int SetPolygonCoordinates(Coordinate[] InputCoordinates)
     {
         try
         {
@@ -297,7 +297,7 @@ class Polygon
         {
             //Measurements
             diameter = Geometry.Diamater(InputRadius);
-            
+
 
             return 0; // Indicate success
         }
@@ -307,7 +307,7 @@ class Polygon
             return -1; // Indicate an error occurred
         }
     }
-    
+
     public double CalApothem(double InputRadius, int InputSides)
     {
         try
@@ -371,7 +371,7 @@ class Polygon
         {
             //Area
             area = Geometry.Area(InputRadius, InputSides, 'R'); ;
-           
+
 
             return 0; // Indicate success
         }
@@ -385,8 +385,10 @@ class Polygon
     {
         try
         {
-            triangleAreas = InternalTriangleArea(CalApothem(InputRadius, InputSides), InputSides);
-            
+            double ApothemBuffer = Geometry.Apothem(InputRadius, InputSides);
+
+            triangleAreas = InternalTriangleArea(ApothemBuffer, InputSides);
+
             return 0; // Indicate success
         }
         catch (Exception e)
@@ -401,7 +403,7 @@ class Polygon
         {
             //Angles 
             interalAngle = InteriorAngles(InputSides);
-            
+
             return 0; // Indicate success
         }
         catch (Exception e)
@@ -428,7 +430,7 @@ class Polygon
     {
         try
         {
-            interiorAngleSum = CalInteralAngle(InputSides) * InputSides;
+            interiorAngleSum = Geometry.InteriorAngles(InputSides) * InputSides;
 
             return 0; // Indicate success
         }
@@ -442,8 +444,8 @@ class Polygon
     {
         try
         {
-            exteriorAngleSum = CalExternalAngle(InputSides) * InputSides;
-            
+            exteriorAngleSum = Geometry.ExteriorAngles(InputSides) * InputSides;
+
 
             return 0; // Indicate success
         }

@@ -1,20 +1,20 @@
 ﻿class Geometry
 {
-	//library to calcuate gemometry for regular 2 dimensional polygons
+    //library to calcuate gemometry for regular 2 dimensional polygons
 
-	//Defenitions
+    //Defenitions
 
-	// InputRadius = Measurement from cener point to any Vertex 
-	// InputApothem = measurement from center point to center of a side
-	// Vertex = corner of a polygon, connected to two sides 
-	// Side = a line connecting two vertex points 
-	// 
+    // InputRadius = Measurement from cener point to any Vertex 
+    // InputApothem = measurement from center point to center of a side
+    // Vertex = corner of a polygon, connected to two sides 
+    // Side = a line connecting two vertex points 
+    // 
 
-	//functions
+    //functions
 
-	// InputApothem / InputRadius
-	public static double Apothem(double InputRadius, int SideCount)
-	{
+    // InputApothem / InputRadius
+    public static double Apothem(double InputRadius, int SideCount)
+    {
         //apothem is the length from center point to center of a side formula = R cos(π/n)
 
         //Calculation check: 
@@ -25,11 +25,11 @@
         double ApothemBuffer = InputRadius * Math.Cos(Math.PI / SideCount);
 
         return ApothemBuffer;
-	}
+    }
 
 
-	public static double Radius(double Apothem, int SideCount)
-	{
+    public static double Radius(double Apothem, int SideCount)
+    {
         //radius (length from center to vertex) given the apothem = r sec(π/n) = r cos(1 / (π/n))
 
         //Calculation check: 
@@ -40,10 +40,10 @@
         double RadiusBuffer = Apothem * Math.Acos(1 / (Math.PI / SideCount));
 
         return RadiusBuffer;
-	}
+    }
 
-	public static double Diamater(double InputRadius)
-	{
+    public static double Diamater(double InputRadius)
+    {
         //diameter is twice the radius
 
         //Calculation check: 
@@ -53,39 +53,40 @@
         double DiamaterBuffer = 2 * InputRadius;
 
         return DiamaterBuffer;
-	}
+    }
 
-	// angles
-	public static int InteriorAngles(int SideCount)
-	{
+    // angles
+    public static int InteriorAngles(int SideCount)
+    {
         //interior angle of a regular n-sided polygon = (((n-2)/n) x 180° )
 
         //Calculation check: 
         //Side = 6 
         //Interior Angle = 120
 
-        int InteriorAngleBuffer = (((SideCount - 2) / SideCount) * 180);
+        double InteriorAngleBuffer = ((SideCount - 2.0) / SideCount) * 180;
 
-        return InteriorAngleBuffer;
-	}
 
-	public static int ExteriorAngles(int SideCount)
-	{
-        //exterior angle of a regular n-sided polygon = 360 - 360/n 
+        return (int)Math.Round(InteriorAngleBuffer, 0);
+    }
+
+    public static int ExteriorAngles(int SideCount)
+    {
+        //exterior angle of a regular n-sided polygon = 360/n 
 
         //Calculation check: 
         //Side = 6 
         //Exterior Angle = 60
 
-        int ExteriorAngleBuffer = 360 / SideCount;
+        double ExteriorAngleBuffer = 360.0 / SideCount;
 
-        return ExteriorAngleBuffer;
-	}
+        return (int)Math.Round(ExteriorAngleBuffer, 0);
+    }
 
-	// sides
-	// side lenghth given InputApothem
-	public static double SidesLengthApothem(double Apothem, int SideCount)
-	{
+    // sides
+    // side lenghth given InputApothem
+    public static double SidesLengthApothem(double Apothem, int SideCount)
+    {
         //side length of regular polygon given the apothem = 2r tan(π/n)
 
         //Calculation check: 
@@ -97,11 +98,11 @@
 
         return SideLengthBuffer;
 
-	}
+    }
 
-	// side length given InputRadius
-	public static double SidesLengthRadius(double Radius, int SideCount)
-	{
+    // side length given InputRadius
+    public static double SidesLengthRadius(double Radius, int SideCount)
+    {
         //side length of regular polygon given the apothem = 2R Sin(π/n)
 
         //Calculation check: 
@@ -112,11 +113,11 @@
         double SideLengthBuffer = (2 * Radius) * Math.Sin(Math.PI / SideCount);
 
         return SideLengthBuffer;
-	}
+    }
 
-	// perimiter
-	public static double Perimiter(double Measurement, int SideCount, char MeasureType)
-	{
+    // perimiter
+    public static double Perimiter(double Measurement, int SideCount, char MeasureType)
+    {
         //Perimiter = SideLength * InputSideCount
 
         //Calculation check: 
@@ -128,35 +129,35 @@
 
         double Perimiter = 0.0;
 
-		switch (MeasureType)
-		{
+        switch (MeasureType)
+        {
 
-			case 'R': // InputRadius
+            case 'R': // InputRadius
 
-				Perimiter = PerimiterRadius(Measurement, SideCount);
+                Perimiter = PerimiterRadius(Measurement, SideCount);
 
-				break;
+                break;
 
-			case 'A': // InputApothem
+            case 'A': // InputApothem
 
-				Perimiter = PerimiterApothem(Measurement, SideCount);
+                Perimiter = PerimiterApothem(Measurement, SideCount);
 
-				break;
+                break;
 
 
-			case 'S': //Side
+            case 'S': //Side
 
-				Perimiter = PerimiterSide(Measurement, SideCount);
+                Perimiter = PerimiterSide(Measurement, SideCount);
 
-				break;
-		}
+                break;
+        }
 
-		return Perimiter;
+        return Perimiter;
 
-	}
+    }
 
-	public static double PerimiterApothem(double InputApothem, int InputSideCount)
-	{
+    public static double PerimiterApothem(double InputApothem, int InputSideCount)
+    {
         //perimiter of regular polygon from InputApothem = 2a tan(180/n) * n
 
         //Calculation check: 
@@ -168,10 +169,10 @@
 
         return PerimiterBuffer;
 
-	}
+    }
 
-	public static double PerimiterRadius(double InputRadius, int InputSideCount)
-	{
+    public static double PerimiterRadius(double InputRadius, int InputSideCount)
+    {
         //perimiter of regular polygon from InputRadius = 2a Sin(180/n) * n
 
         //Calculation check: 
@@ -183,10 +184,10 @@
 
         return PerimiterBuffer;
 
-	}
+    }
 
-	public static double PerimiterSide(double SideLength, int SideCount)
-	{
+    public static double PerimiterSide(double SideLength, int SideCount)
+    {
         //perimiter of regular polygon from Sides = a * n
 
         //Calculation check: 
@@ -197,12 +198,12 @@
         double PerimiterBuffer = SideLength * SideCount;
 
         return PerimiterBuffer;
-	}
+    }
 
 
-	// area
-	public static double Area(double Measurment, int SideCount, char MeasureType)
-	{
+    // area
+    public static double Area(double Measurment, int SideCount, char MeasureType)
+    {
         //calculates area based on specified input
 
         //Calculation check: 
@@ -212,29 +213,29 @@
 
         double Area = 0.0;
 
-		switch (MeasureType)
-		{
+        switch (MeasureType)
+        {
 
-			case 'R':
-				Area = AreaRadius(Measurment, SideCount);
-				break;
+            case 'R':
+                Area = AreaRadius(Measurment, SideCount);
+                break;
 
-			case 'A':
-				Area = AreaApothem(Measurment, SideCount);
-				break;
+            case 'A':
+                Area = AreaApothem(Measurment, SideCount);
+                break;
 
 
-			case 'S':
-				Area = AreaSide(Measurment, SideCount);
-				break;
-		}
+            case 'S':
+                Area = AreaSide(Measurment, SideCount);
+                break;
+        }
 
-		return Area;
-	}
+        return Area;
+    }
 
-	// radius
-	public static double AreaRadius(double Radius, int SideCount)
-	{
+    // radius
+    public static double AreaRadius(double Radius, int SideCount)
+    {
         //to calculate the area of an n sided polygon ginven the radius (distance from center to vertex) = nr^2 tan(π/n)
         //
 
@@ -250,9 +251,9 @@
 
     }
 
-	// InputApothem
-	public static double AreaApothem(double Apothem, int SideCount)
-	{
+    // InputApothem
+    public static double AreaApothem(double Apothem, int SideCount)
+    {
         //to claculate an n sided polygon given apothem (length between center and center of side) = a^2 n tan(180/n)
 
         //Calculation check: 
@@ -265,11 +266,11 @@
         return AreaBuffer;
     }
 
-	// side length
+    // side length
 
 
-	public static double AreaSide(double SideLength, int SideCount)
-	{
+    public static double AreaSide(double SideLength, int SideCount)
+    {
         //to calculate area of a polygon using the length of a side = (1/4)na^2
 
         //Calculation check: 
@@ -277,24 +278,26 @@
         //Side = 6 
         //937.5
 
-        double AreaBuffer = (1/4) * SideCount * Math.Pow(SideLength, 2);
+        double AreaBuffer = (1 / 4) * SideCount * Math.Pow(SideLength, 2);
 
         return AreaBuffer;
-	}
+    }
 
-	public static int Diagonals(int SideCount)
-	{
+    public static int Diagonals(int SideCount)
+    {
         //number of diagonals in a polygon = n(n-3)/2
 
         //Calculation check: 
         //Side = 6 
         //9
 
-        return SideCount * (SideCount - 3) / 2;
-	}
+        int DiagonalBuffer = SideCount * (SideCount - 3) / 2;
 
-	public static double InternalTriangleArea(double Apothem, int SideCount)
-	{
+        return DiagonalBuffer;
+    }
+
+    public static double InternalTriangleArea(double Apothem, int SideCount)
+    {
         //calculates the area of the triangles formed by each side and the center point of the polygon
 
         //Calculation check: 
@@ -302,9 +305,11 @@
         //Side = 6 
         //360.75
 
-        return Apothem * SidesLengthApothem(Apothem, SideCount) / 2;
+        double ApothemBuffer = Apothem * SidesLengthApothem(Apothem, SideCount) / 2;
 
-	}
+        return ApothemBuffer;
+
+    }
 
 }
 
