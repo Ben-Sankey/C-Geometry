@@ -1,9 +1,10 @@
 ﻿using System.Drawing;
 
-class Coordinates
+public class Coordinates
 {
     public struct Coordinate
     {
+        public int Position;
         public int x;
         public int y;
     }
@@ -25,6 +26,7 @@ class Coordinates
             Radian = Angle * (Math.PI / 180.0);
             xCoord = (int)Math.Round(InputRadius * Math.Cos(Radian), 0);
             yCoord = (int)Math.Round(InputRadius * Math.Sin(Radian), 0);
+            Coords[i].Position = i + 1;
             Coords[i].x = xCoord;
             Coords[i].y = yCoord;
         }
@@ -49,7 +51,7 @@ class Coordinates
             yCoord = (int)Math.Round(InputRadius * Math.Sin(Radian), 0);
             Coords[i].X = xCoord;
             Coords[i].Y = yCoord;
-            
+
         }
         return Coords;
     }
@@ -64,6 +66,7 @@ class Coordinates
     public static Coordinate PointToCoordinate(Point InPoint)
     {
         Coordinate OutCoord = new Coordinate();
+        OutCoord.Position = 0;
         OutCoord.x = InPoint.X;
         OutCoord.y = InPoint.Y;
         return OutCoord;
@@ -83,6 +86,7 @@ class Coordinates
         for (int i = 0; i < InPoints.Length; i++)
         {
             OutCoords[i] = PointToCoordinate(InPoints[i]);
+            OutCoords[i].Position = i + 1;
         }
         return OutCoords;
     }
@@ -93,15 +97,15 @@ class Coordinates
     {
         for (int i = 0; i < InCoords.Length; i++)
         {
-            Console.WriteLine("[" + InCoords[i].x + "," + InCoords[i].y + "]");
+            Console.WriteLine("[" + InCoords[i].x + "," + InCoords[i].y + "], ");
         }
     }
 
-    public static void CreatePoint(Point[] InPoints)
+    public static void PrintPoints(Point[] InPoints)
     {
         for (int i = 0; i < InPoints.Length; i++)
         {
-            Console.WriteLine("[" + InPoints[i].X + "," + InPoints[i].Y + "]");
+            Console.WriteLine("[" + InPoints[i].X + "," + InPoints[i].Y + "], ");
         }
     }
 
@@ -110,8 +114,13 @@ class Coordinates
         string OutString = "";
         for (int i = 0; i < InCoords.Length; i++)
         {
-            OutString += "[" + InCoords[i].x + "," + InCoords[i].y + "], ";
+            OutString += "[" + InCoords[i].x + "." + InCoords[i].y + "], ";
         }
+
+        OutString.TrimEnd(',');
+
+        OutString += System.Environment.NewLine;
+
         return OutString;
     }
 
@@ -120,8 +129,38 @@ class Coordinates
         string OutString = "";
         for (int i = 0; i < InPoints.Length; i++)
         {
-            OutString += "[" + InPoints[i].X + "," + InPoints[i].Y + "], ";
+            OutString += "[" + InPoints[i].X + "." + InPoints[i].Y + "], ";
         }
+
+        OutString.TrimEnd(',');
+
+        OutString += System.Environment.NewLine;
+
         return OutString;
+    }
+
+    //apply offset to coordinates
+    public static Coordinate[] OffsetCoordinates(Coordinate[] InCoords, int xOffset, int yOffset)
+    {
+        Coordinate[] OutCoords = new Coordinate[InCoords.Length];
+        for (int i = 0; i < InCoords.Length; i++)
+        {
+            OutCoords[i].Position = InCoords[i].Position;
+            OutCoords[i].x = InCoords[i].x + xOffset;
+            OutCoords[i].y = InCoords[i].y + yOffset;
+        }
+        return OutCoords;
+    }
+
+    public static Point[] OffsetPoints(Point[] InPoints, int xOffset, int yOffset)
+    {
+        Point[] OutPoints = new Point[InPoints.Length];
+        for (int i = 0; i < InPoints.Length; i++)
+        {
+            OutPoints[i].X = InPoints[i].X + xOffset;
+            OutPoints[i].Y = InPoints[i].Y + yOffset;
+        }
+        return OutPoints;
+
     }
 }
